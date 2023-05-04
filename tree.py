@@ -1,5 +1,5 @@
 from node import Node
-
+import unittest
 
 class Tree:
     """ Tree class for binary tree """
@@ -63,15 +63,22 @@ class Tree:
 
     def deleteTree(self):
         # TODO 1
+        """ Destructor for Tree class """
         self.root = None
 
     def printTree(self):
         # TODO 1
+        """ Prints the tree """
         if self.root is not None:
             self._printInorderTree(self.root)
 
     def _printInorderTree(self, node):
         # TODO 1
+        """ Prints the tree Inorder
+
+        Args:
+            node (Tree): root node
+        """
         if node is not None:
             self._printInorderTree(node.left)
             print(str(node.data) + ' ')
@@ -79,10 +86,42 @@ class Tree:
 
     def _printPreorderTree(self, node):
         # TODO 2
-        pass
+        """ Prints the tree Preorder
+
+        Args:
+            node (Tree): root node
+        """
+        if node is not None:
+            print(str(node.data) + ' ')
+            self._printPreorderTree(node.left)
+            self._printPreorderTree(node.right)
 
     def _printPostorderTree(self, node):
         # TODO 2
-        pass
+        """ Prints the tree Postorder
+
+        Args:
+            node (Tree): root node
+        """
+        if node is not None:
+            self._printPostorderTree(node.left)
+            self._printPostorderTree(node.right)
+            print(str(node.data) + ' ')
 
 
+class Test_tree(unittest.TestCase):
+    """ Class for testing Tree """
+    
+    def test_1(self):
+        t = Tree()
+        t.add(3)
+        t.add(4)
+        t.add(0)
+        self.assertEqual(t.find(4).data, 4)
+        
+    def test_2(self):
+        t = Tree()
+        t.add(3)
+        t.add(4)
+        t.add(0)
+        self.assertEqual(t.find(5), None)
